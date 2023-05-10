@@ -4,6 +4,7 @@
 -- Variables:
 
 local HiddenUI = get_hidden_gui or gethui
+local visible = true
 
 -- Instances:
 
@@ -64,4 +65,16 @@ ImageButton.Image = "rbxassetid://283666551"
 
 ImageButton.MouseButton1Up:Connect(function()
 	loadstring(TextBox.ContentText)
+end)
+
+game.UserInputService.InputBegan:Connect(function(input, gameProc)
+	if input.KeyCode == Enum.KeyCode.Insert then
+		if visible then
+			ScreenGui.Enabled = false
+			visible = false
+		else
+			ScreenGui.Enabled = true
+			visible = true
+		end
+	end
 end)
